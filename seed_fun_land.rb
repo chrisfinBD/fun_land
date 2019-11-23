@@ -15,12 +15,12 @@ def make_guests_seed(number_guests = 3)
     puts i
     dummy_name = Faker::Name.name      #=> "Christophe Bartell"
     dummy_tokens = Random.rand(10000)
-puts dummy_name 
-puts dummy_tokens
-    insert_cmd = "INSERT INTO guests (name, tokens) VALUES (#{dummy_name}, #{dummy_tokens});"
+    puts dummy_name 
+    puts dummy_tokens
+    insert_cmd = "INSERT INTO guests (name, tokens) VALUES (#{dummy_name}, #{dummy_tokens});\n"
 
   # Write to file
-    File.open("guests_seed.txt", "w+") do |f|
+    File.open("guests_seed.txt", "a") do |f|
       f.write(insert_cmd)
     end
 
@@ -31,6 +31,3 @@ end
 
 make_guests_seed
 
-3.times do |i|
-  puts i
-end

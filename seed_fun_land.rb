@@ -32,20 +32,35 @@ def make_rewards_seed(number_rewards = 3)
   # Remove old file
     File.delete("rewards_seed.txt") if File.exist?("rewards_seed.txt")
   
-  # Add guests 
+  # Add reward items and make sure teh names are unique
+  used_names = []
   number_rewards.to_i.times do |i| 
-      dummy_name = Faker::Name.name
-      dummy_tokens = Random.rand(5000)
-      is_available = Random.rand(2) == 1
-      puts is_available
-      #puts dummy_name 
-      #puts dummy_tokens
-      insert_cmd = "INSERT INTO rewards (item_name, tokens, available) VALUES ('#{dummy_name}', #{dummy_tokens}, #{is_available});\n"
-  
+    game_pick = Random.rand(2)
+      
+    case game_pick
+    when 0
+    #dummy_name = Faker::Name.name      #=> "Christophe Bartell"
+    #Faker::Commerce.product_name
+      dummy_name = Faker::Games::Zelda.item
+    when 1
+      dummy_name = Faker::Games::Dota.item
+    end
+
+    if used_names.include?(dummy_name) 
+      next
+    end
+
+    dummy_tokens = Random.rand(5000)
+    is_available = Random.rand(2) == 1
+    puts is_available
+    #puts dummy_name 
+    #puts dummy_tokens
+    insert_cmd = "INSERT INTO rewards (item_name, tokens, available) VALUES ('#{dummy_name}', #{dummy_tokens}, #{is_available});\n"
+
     # Write to file
-      File.open("rewards_seed.txt", "a") do |f|
-        f.write(insert_cmd)
-      end
+    File.open("rewards_seed.txt", "a") do |f|
+      f.write(insert_cmd)
+    end
   
     end
   

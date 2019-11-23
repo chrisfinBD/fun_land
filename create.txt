@@ -1,0 +1,10 @@
+CREATE TABLE rewards (
+id serial PRIMARY KEY,
+item_name varchar(50) UNIQUE NOT NULL,
+tokens integer NOT NULL,
+available boolean);
+
+CREATE TABLE guests (
+id serial PRIMARY KEY,
+name varchar(50) UNIQUE NOT NULL,
+tokens integer NOT NULL);

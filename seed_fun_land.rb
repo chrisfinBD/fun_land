@@ -34,7 +34,7 @@ def make_rewards_seed(number_rewards = 75)
   
   # Add reward items and make sure teh names are unique
   used_names = []
-  number_rewards.to_i.times do |i| 
+  while used_names.length < 75 do 
     item_source_pick = Random.rand(3)
       
     case item_source_pick
